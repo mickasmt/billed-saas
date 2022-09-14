@@ -37,6 +37,7 @@ export default class Login {
 
   }
 
+  // error : admin not employee for email/pwd
   handleSubmitAdmin = e => {
     e.preventDefault()
     const user = {
