@@ -27,34 +27,34 @@ export default class NewBill {
     const formData = new FormData()
     const email = JSON.parse(localStorage.getItem("user")).email
 
-    // if file extension isn't in extensions allowed : clear input file
-    if(!extensionsAllowed.includes(fileType)) {
-      fileInput.value = ''
-      return 
+    // if file input isn't null
+    if(fileInput.files[0]) {
+      // if file extension isn't in extensions allowed : clear input file
+      if(!extensionsAllowed.includes(fileType)) {
+        alert('Only jpg, jpeg and png files allowed !')
+        fileInput.value = ''
+        return 
+      }
+  
+      formData.append('file', fileInput.files[0])
+      formData.append('email', email)
+  
+      this.store
+        .bills()
+        .create({
+          data: formData,
+          headers: {
+            noContentType: true
+          }
+        })
+        .then(({fileUrl, key}) => {
+          console.log("fileUrl", fileUrl)
+          console.log("key", key)
+          this.billId = key
+          this.fileUrl = fileUrl
+          this.fileName = fileName
+        }).catch(error => console.error(error))
     }
-
-    formData.append('file', fileInput.files[0])
-    formData.append('email', email)
-
-    // for (const value of formData.values()) {
-    //   console.log(value);
-    // }
-
-    this.store
-      .bills()
-      .create({
-        data: formData,
-        headers: {
-          noContentType: true
-        }
-      })
-      .then(({fileUrl, key}) => {
-        console.log("fileUrl", fileUrl)
-        console.log("key", key)
-        this.billId = key
-        this.fileUrl = fileUrl
-        this.fileName = fileName
-      }).catch(error => console.error(error))
   }
   handleSubmit = e => {
     e.preventDefault()
