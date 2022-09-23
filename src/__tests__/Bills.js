@@ -119,24 +119,24 @@ describe("Given I am connected as an employee", () => {
 
   // test d'intégration GET
   describe("When I navigate to Bills Page", () => {
-    // test("fetches bills from mock API GET", async () => {
-    //   localStorage.setItem(
-    //     "user",
-    //     JSON.stringify({ type: "Employee", email: "e@e" })
-    //   );
+    test("fetches bills from mock API GET", async () => {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ type: "Employee", email: "e@e" })
+      );
 
-    //   const root = document.createElement("div");
-    //   root.setAttribute("id", "root");
-    //   document.body.append(root);
-    //   router();
+      const root = document.createElement("div");
+      root.setAttribute("id", "root");
+      document.body.append(root);
+      router();
 
-    //   window.onNavigate(ROUTES_PATH.Bills);
-    
-    //   const contentPending = await screen.getByText("Mes notes de frais");
-    //   expect(contentPending).toBeTruthy();
+      window.onNavigate(ROUTES_PATH.Bills);
 
-    //   expect(screen.getByTestId("btn-new-bill")).toBeTruthy();
-    // });
+      const contentPending = await screen.getByText("Mes notes de frais");
+      expect(contentPending).toBeTruthy();
+
+      expect(screen.getByTestId("btn-new-bill")).toBeTruthy();
+    });
 
     test("Then, it should render Loading...", () => {
       document.body.innerHTML = BillsUI({ data: [], loading: true });
