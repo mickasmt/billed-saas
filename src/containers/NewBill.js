@@ -31,8 +31,8 @@ export default class NewBill {
     if(fileInput.files[0]) {
       // if file extension isn't in extensions allowed : clear input file
       if(!extensionsAllowed.includes(fileType)) {
+        alert('Only jpg, jpeg and png files allowed !')
         fileInput.value = ''
-        // alert('Only jpg, jpeg and png files allowed !')
         return 
       }
   
